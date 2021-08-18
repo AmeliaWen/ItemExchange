@@ -2,11 +2,21 @@ package com.ssm.demo.mapper;
 
 import com.ssm.demo.entity.Itemexchangeinfo;
 import com.ssm.demo.entity.ItemexchangeinfoExample;
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
+@Mapper
 public interface ItemexchangeinfoMapper {
+    //@Select("SELECT COUNT(*) FROM itemExchangeInfo WHERE id = #{id}")
     long countByExample(ItemexchangeinfoExample example);
+
+    @Select("select * from itemExchangeInfo")
+    List<Itemexchangeinfo> findAll();
 
     int deleteByExample(ItemexchangeinfoExample example);
 
@@ -18,6 +28,7 @@ public interface ItemexchangeinfoMapper {
 
     List<Itemexchangeinfo> selectByExample(ItemexchangeinfoExample example);
 
+    @Select("select * from itemExchangeInfo where id = #{id}")
     Itemexchangeinfo selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Itemexchangeinfo record, @Param("example") ItemexchangeinfoExample example);
